@@ -69,9 +69,8 @@ fun LobbyScreen(navController: NavController) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     ModalNavigationDrawer(
         drawerState = drawerState,
-        drawerShape = RectangleShape,
         drawerContent = {
-            ModalDrawerSheet(drawerShape = RectangleShape) {
+            ModalDrawerSheet(shape = RectangleShape) {
                 Column(
                     modifier = Modifier
                         .background(TelegramBlue40)
