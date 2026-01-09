@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -29,16 +30,17 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -67,26 +69,26 @@ fun LobbyScreen(navController: NavController) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     ModalNavigationDrawer(
         drawerState = drawerState,
+        drawerShape = RectangleShape,
         drawerContent = {
-            ModalDrawerSheet {
+            ModalDrawerSheet(drawerShape = RectangleShape) {
                 Column(
                     modifier = Modifier
                         .background(TelegramBlue40)
                         .fillMaxWidth()
-                        .padding(8.dp)
+                        .padding(top = 0.dp, start = 8.dp, end = 8.dp, bottom = 8.dp)
+                        .statusBarsPadding()
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.profile_pic),
                         contentDescription = stringResource(
                             id = R.string.user_profile_pic_description
                         ),
-
                         modifier = Modifier
                             .padding(8.dp)
                             .size(64.dp)
                             .clip(CircleShape),
                         contentScale = ContentScale.Crop
-
                     )
                     Text(
                         text = uiState.userName,
@@ -164,6 +166,7 @@ fun LobbyTopBar(onMenuIconClick: () -> Unit) {
     Row(
         modifier = Modifier
             .background(TelegramBlue40)
+            .statusBarsPadding()
             .padding(vertical = 4.dp)
     ) {
         InputIcon(
