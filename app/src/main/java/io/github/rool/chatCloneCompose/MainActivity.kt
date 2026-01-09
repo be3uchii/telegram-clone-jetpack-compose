@@ -3,8 +3,6 @@ package io.github.rool.chatCloneCompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
@@ -41,26 +39,10 @@ class MainActivity : ComponentActivity() {
                     startDestination = ChatCloneScreens.Lobby.route,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    composable(
-                        route = ChatCloneScreens.Lobby.route,
-                        exitTransition = {
-                            slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left, tween(300))
-                        },
-                        popEnterTransition = {
-                            slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right, tween(300))
-                        }
-                    ) {
+                    composable(route = ChatCloneScreens.Lobby.route) {
                         LobbyScreen(navController)
                     }
-                    composable(
-                        route = ChatCloneScreens.ChatGroup.route,
-                        enterTransition = {
-                            slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, tween(300))
-                        },
-                        popExitTransition = {
-                            slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, tween(300))
-                        }
-                    ) {
+                    composable(route = ChatCloneScreens.ChatGroup.route) {
                         ChatGroupScreen(navController = navController, viewModel = hiltViewModel())
                     }
                 }
