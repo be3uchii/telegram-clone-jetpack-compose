@@ -2,6 +2,8 @@ package io.github.rool.chatCloneCompose.features.chatGroup
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -18,12 +20,15 @@ fun ChatGroupScreen(navController: NavController, viewModel: ChatGroupViewModel)
     val uiState = viewModel.chatUiState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
     Scaffold(
-        topBar = { ChatTopBar(navController, uiState.value) }
+        topBar = { ChatTopBar(navController, uiState.value) },
+        contentWindowInsets = androidx.compose.foundation.layout.WindowInsets(0, 0, 0, 0)
     ) { paddingValues ->
         Column(
             Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .imePadding()
+                .navigationBarsPadding()
         ) {
             ChatContent(
                 modifier = Modifier.weight(1f),
